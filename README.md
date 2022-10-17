@@ -5,7 +5,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+A mobile app designed to allow users to collect, trade and showcase gif cards with other users.
 
 ## User stories
 
