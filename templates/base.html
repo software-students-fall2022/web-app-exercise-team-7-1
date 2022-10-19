@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cards Temp Name</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cards Temp Name</h1>
+        <nav>
+          <a href="{{ url_for('home')}}">Home</a>
+        </nav>
+      </header>
+      <main>{% block container %} {% endblock %}</main>
+      <footer>
+        <p>
+          <a
+            href="{{ url_for('pack')}}"
+            >Open Pack</a
+          >
+
+          <a
+          href="{{ url_for('show')}}"
+          >Showcase</a
+          >
+
+          <a
+          href="{{ url_for('exchange')}}"
+          >Exchange</a
+          >
+
+          <a
+          href="{{ url_for('collection')}}"
+          >View Collection</a
+          >
+
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
