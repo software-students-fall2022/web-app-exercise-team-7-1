@@ -45,6 +45,11 @@ def home():
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('index.html', docs=docs) # render the hone template
 
+@app.route('/collection')
+def collection():
+    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    return render_template('collection.html', docs=docs) # render the hone template
+
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
 def create_post():
