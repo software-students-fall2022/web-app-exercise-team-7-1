@@ -50,6 +50,21 @@ def collection():
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('collection.html', docs=docs) # render the hone template
 
+@app.route('/pack')
+def pack():
+    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    return render_template('pack.html', docs=docs) # render the hone template
+
+@app.route('/show')
+def show():
+    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    return render_template('show.html', docs=docs) # render the hone template
+
+@app.route('/exchange')
+def exchange():
+    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
+    return render_template('exchange.html', docs=docs) # render the hone template
+
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
 def create_post():
