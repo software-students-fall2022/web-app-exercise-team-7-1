@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask-MongoDB Example App</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Flask-Pymongo Example App</h1>
+        <nav>
+          <a href="{{ url_for('home')}}">Home</a>
+        </nav>
+      </header>
+      <main>{% block container %} {% endblock %}</main>
+      <footer>
+        <p>
+          &copy; 2022. Shared under the GPL3 license. Source code available at
+          <a
+            href="https://github.com/nyu-software-engineering/flask-pymongo-web-app-example"
+            >available on Github</a
+          >.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
