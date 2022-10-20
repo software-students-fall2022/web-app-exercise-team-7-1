@@ -226,7 +226,7 @@ def signup_submit():
         return redirect(url_for('login')) # redirect to login page
 
     # create a new document in the database for this new user
-    user_id = db.users.insert_one({"email": email, "password": hashed_password}).inserted_id # hash the password and save it to the database
+    user_id = db.users.insert_one({"email": email, "password": hashed_password, "cards": []}).inserted_id # hash the password and save it to the database
     if user_id:
         # successfully created a new user... make a nice user object
         user = User({
