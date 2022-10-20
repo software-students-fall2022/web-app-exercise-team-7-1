@@ -71,6 +71,7 @@ form textarea {
 }
 
 #pack{
+  text-align: center;
   margin: 0px auto;
   border: 1px solid black;
   width: 100px;
