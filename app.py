@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from dotenv import dotenv_values
+from flask_simplelogin import SimpleLogin
 
 import pymongo
 import datetime
@@ -10,6 +11,7 @@ import sys
 
 # instantiate the app
 app = Flask(__name__)
+SimpleLogin(app)
 
 # load credentials and configuration options from .env file
 # if you do not yet have a file named .env, make one based on the template in env.example
@@ -37,13 +39,17 @@ except Exception as e:
 # set up the routes
 
 # route for the home page
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/')
 def home():
     """
     Route for the home page
     """
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
-    return render_template('index.html', docs=docs) # render the hone template
+    return render_template('index.html') # render the hone template
 
 @app.route('/collection')
 def collection():
