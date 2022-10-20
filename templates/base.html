@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gif Cards</title>
+    <title>Flask-MongoDB Example App</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -10,13 +10,19 @@
   <body>
     <div class="container">
       <header>
-        <h1>Gif Cards</h1>
-        <nav>
-          <a href="{{ url_for('open_pack')}}">Home</a>
-        </nav>
+        <h1>Flask-Pymongo Example App</h1>
+        {% include '_main_nav.html' %}
       </header>
+      {% include '_flash_messages.html' %}
       <main>{% block container %} {% endblock %}</main>
       <footer>
+        <p>
+          &copy; 2022. Shared under the GPL3 license. Source code available at
+          <a
+            href="https://github.com/nyu-software-engineering/flask-pymongo-web-app-example"
+            >available on Github</a
+          >.
+        </p>
       </footer>
     </div>
   </body>

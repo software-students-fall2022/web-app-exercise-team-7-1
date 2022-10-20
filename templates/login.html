@@ -1,13 +1,18 @@
-{% extends 'base.html' %}
+
+{% extends 'base.html' %} 
+
 {% block container %}
-    <h1>Log In!</h1>
-    <form method="POST" action ="">
-        Username: <br>
-        <input type="text" name="username"><br>
-        Password: <br>
-        <input type="password" name="password"><br>
-        <input type="submit" value="Log In" >
-    </form>
-    <a href="{{ url_for('signup')}}">Dont have an account yet? Sign Up</a>
+
+<h2>Log in</h2>
+<p>
+  Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a>!
+</p>  
+<form action="{{ url_for('login_submit') }}" method="POST">
+  <input type="email" name="email" id="email" placeholder="email" />
+  <br />
+  <input type="password" name="password" id="password" placeholder="password" />
+  <br />
+  <input type="submit" name="submit" value="Log in" />
+</form>
 
 {% endblock %}
