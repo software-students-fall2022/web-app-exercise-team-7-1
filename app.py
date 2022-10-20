@@ -2,10 +2,6 @@
 
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from dotenv import dotenv_values
-from flask_simplelogin import SimpleLogin
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
 
 import pymongo
 import datetime
@@ -48,8 +44,7 @@ def home():
     """
     Route for the home page
     """
-    docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
-    return render_template('index.html') # render the hone template
+    return redirect(url_for('login'))
 
 @app.route('/login',methods=['GET',"POST"])
 def login():
@@ -71,10 +66,11 @@ def signup():
     if request.method == "POST":
         name = request.form["username"]
         pwd = request.form["password"]
-        user_inserted = db.Users.insert_one({"username": name, "password": pwd})
+        db.Users.insert_one({"username": name, "password": pwd})
+        user_inserted = db.Users.find_one({"username": name, "password": pwd})
         global user
         user = user_inserted
-        return render_template('open_pack.html', info=name)
+        return render_template('open_pack.html', username=user["username"])
     else:
         return render_template('signup.html')
 
