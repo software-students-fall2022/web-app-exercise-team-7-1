@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block container %}
-    <h1>Log In!</h1>
+    <h1>Sign Up!</h1>
     <form method="POST" action ="">
         Username: <br>
         <input type="text" name="username"><br>
@@ -8,6 +8,7 @@
         <input type="password" name="password"><br>
         <input type="submit" value="Login" >
     </form>
-    <a href="{{ url_for('signup')}}">Dont have an account yet? Sign Up</a>
+    <a href="{{ url_for('login')}}">Already Have an account? Log In!</a>
+    
 
 {% endblock %}

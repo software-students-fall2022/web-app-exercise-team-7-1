@@ -3,6 +3,9 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from dotenv import dotenv_values
 from flask_simplelogin import SimpleLogin
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 import pymongo
 import datetime
@@ -10,8 +13,8 @@ from bson.objectid import ObjectId
 import sys
 
 # instantiate the app
+user = None 
 app = Flask(__name__)
-SimpleLogin(app)
 
 # load credentials and configuration options from .env file
 # if you do not yet have a file named .env, make one based on the template in env.example
@@ -39,9 +42,6 @@ except Exception as e:
 # set up the routes
 
 # route for the home page
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 @app.route('/')
 def home():
@@ -50,6 +50,33 @@ def home():
     """
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('index.html') # render the hone template
+
+@app.route('/login',methods=['GET',"POST"])
+def login():
+    if request.method == "POST":
+        name = request.form["username"]
+        pwd = request.form["password"]
+        user_found = db.Users.find_one({"username": name, "password": pwd})
+        if user_found==None: #if user is not found redirect
+            return render_template("login.html",info="WRONG!")
+        else:
+            global user
+            user = user_found
+            return render_template('open_pack.html', username=name)
+    else:
+        return render_template('login.html')
+
+@app.route('/signup',methods=['GET',"POST"])
+def signup():
+    if request.method == "POST":
+        name = request.form["username"]
+        pwd = request.form["password"]
+        user_inserted = db.Users.insert_one({"username": name, "password": pwd})
+        global user
+        user = user_inserted
+        return render_template('open_pack.html', info=name)
+    else:
+        return render_template('signup.html')
 
 @app.route('/collection')
 def collection():
@@ -70,6 +97,14 @@ def show():
 def exchange():
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('exchange.html', docs=docs) # render the hone template
+@app.route('/logout')
+def logout():
+    user = None
+    return render_template("login.html")
+    
+@app.route('/open_pack')
+def open_pack():
+    return render_template("open_pack.html",username = user["username"])
 
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
