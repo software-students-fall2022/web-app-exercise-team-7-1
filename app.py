@@ -103,13 +103,16 @@ def home():
     """
     Route for the home page
     """
-    docs = db.posts.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
-    return render_template('index.html', docs=docs) # render the hone template
+    return render_template('login.html') # render the hone template
 
 @app.route('/collection')
 def collection():
     docs = db.exampleapp.find({}).sort("created_at", -1) # sort in descending order of created_at timestamp
     return render_template('collection.html', docs=docs) # render the hone template
+
+@app.route("/open_pack")
+def open_pack():
+    return render_template('open_pack.html')
 
 @app.route('/pack')
 def pack():
@@ -247,7 +250,7 @@ def login():
     # if the current user is already signed in, there is no need to sign up, so redirect them
     if flask_login.current_user.is_authenticated:
         flash('You are already logged in, silly!') # flash can be used to pass a special message to the template we are about to render
-        return redirect(url_for('home')) # tell the web browser to make a request for the / route (the home function)
+        return redirect(url_for('open_pack')) # tell the web browser to make a request for the / route (the home function)
     
     # else
     return render_template('login.html') # render the login form template
@@ -262,7 +265,7 @@ def login_submit():
     if user and check_password_hash(user.data['password'], password):
         flask_login.login_user(user) # log in the user using flask-login
         flash('Welcome back, {}!'.format(user.data['email'])) # flash can be used to pass a special message to the template we are about to render
-        return redirect(url_for('home'))
+        return redirect(url_for('open_pack'))
     # else
     return 'Login failed'
 

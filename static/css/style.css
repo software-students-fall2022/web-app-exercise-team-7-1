@@ -69,3 +69,10 @@ form textarea {
   border: 1px solid gray;
   margin: 10px 0;
 }
+
+#pack{
+  margin: 0px auto;
+  border: 1px solid black;
+  width: 100px;
+  height: 200px;
+}

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+
 {% block container %}
-    <section id="open_pack">
-        <h2>Hello {{username}}</h2>
+    <section id="openPack">
+        <div id = "pack">
+            <h2>Mystery Pack</h2>
+        </div>
+        <form action="" method="POST">
+            <input type="submit" value="Open!"/>
+        </form>
     </section>
 {% endblock %}
