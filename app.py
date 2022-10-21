@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+from calendar import c
 from crypt import methods
 from flask import Flask, render_template, request, redirect, url_for, make_response, flash
 from dotenv import dotenv_values
+import random
 import pymongo
 import datetime
 from bson.objectid import ObjectId
@@ -106,9 +108,10 @@ def home():
     """
     return render_template('login.html') # render the hone template
 
-@app.route('/collection')
-def collection():
-    return render_template('collection.html') # render the hone template
+@app.route('/all_cards')
+def all_cards():
+    cards = db.cards.find({})
+    return render_template('all_cards.html', cards = cards) # render the hone template
 
 @app.route('/open_pack')
 def open_pack():
@@ -116,8 +119,16 @@ def open_pack():
 
 #this route will handle the POST request from open_pack.html
 @app.route('/card', methods=['POST'])
-def card():
-    return render_template('card.html')
+def card(): 
+    rarity = ["basic","epic","legendary"]
+    chances = [.80,.15,.05]
+    lst = random.choices(rarity,chances, k=1)#returns a list
+    rarity_picked = lst[0]
+    cards = []
+    for card in db.cards.find({"rarity":rarity_picked}):
+        cards.append(card)
+    card = random.choice(list(cards))
+    return render_template('card.html',card=card)
 
 @app.route('/showcase')
 def showcase():
@@ -227,7 +238,7 @@ def signup_submit():
         return redirect(url_for('login')) # redirect to login page
 
     # create a new document in the database for this new user
-    user_id = db.users.insert_one({"email": email, "password": hashed_password, "cards": []}).inserted_id # hash the password and save it to the database
+    user_id = db.users.insert_one({"email": email, "password": hashed_password, "cards": [], "showcase": [None] * 5}).inserted_id # hash the password and save it to the database
     if user_id:
         # successfully created a new user... make a nice user object
         user = User({
@@ -235,6 +246,7 @@ def signup_submit():
             "email": email,
             "password": hashed_password,
             "cards" : [],
+            "showcase" : [None] * 5,
         })
         flask_login.login_user(user) # log in the user using flask-login
         flash('Thanks for joining, {}!'.format(user.data['email'])) # flash can be used to pass a special message to the template we are about to render

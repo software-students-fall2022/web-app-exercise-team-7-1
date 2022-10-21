@@ -2,7 +2,7 @@
     {% if user.is_authenticated %}
     Welcome, {{user.data.email }}!<br />
     <li><a href="{{ url_for('open_pack')}}">Open Pack</a></li>
-    <li><a href="{{ url_for('collection')}}">Collection</a></li>
+    <li><a href="{{ url_for('all_cards')}}">All Cards</a></li>
     <li><a href="{{ url_for('exchange')}}">Trade/Gift</a></li>
     <li><a href="{{ url_for('showcase')}}">Showcase</a></li>
     {% else %}
