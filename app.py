@@ -134,9 +134,20 @@ def card():
 def showcase():
     return render_template('showcase.html') # render the hone template
 
-@app.route('/exchange')
+@app.route('/exchange',methods = ["GET","POST"])
 def exchange():
-    return render_template('exchange.html') # render the hone template
+    if request.method == "POST":
+        email = request.form['email']
+        return render_template('exchange.html', email=email) # render the hone templat
+    else:
+        return render_template('exchange.html') # render the hone template
+
+@app.route('/gift/<email>')
+def gift(email):
+    return render_template("gift.html",email = email)
+@app.route('/trade/<email>')
+def trade(email):
+    return render_template("trade.html",email = email)
 
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
