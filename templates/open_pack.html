@@ -5,9 +5,9 @@
     <section id="openPack">
         <div id = "pack">
             <h2>Mystery Packs</h2>
+            <form action="{{ url_for('card') }}" method="POST">
+                <input id="open" type="submit" value="Open!"/>
+            </form>
         </div>
-        <form action="{{ url_for('card') }}" method="POST">
-            <input id="open" type="submit" value="Open!"/>
-        </form>
     </section>
 {% endblock %}

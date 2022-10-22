@@ -2,4 +2,19 @@
 
 {% block container %}
     <h1>Showcase</h1>
+    <section id="collection">
+        {% for card in show %}
+        {% if card == None %}
+        <div class ="select">
+            <a href="{{ url_for('library', index = loop.index0 )}}">Select</a>
+        </div>
+        {% else %}
+        <div class="show">
+            <h3>{{card.cardname}}</h3>
+            <img class="gif" src="{{card.url}}"/>
+            <h4>{{card.rarity}}</h4>
+        </div>
+        {% endif %}
+        {%endfor%}
+    </section>
 {% endblock %}

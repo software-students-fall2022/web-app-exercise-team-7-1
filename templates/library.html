@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<h1>Select a Card</h1>
+<section id="library">
+    {% for card in cards %}
+    <div class="card">
+        <h3>{{card.cardname}}</h3>
+        <img class="gif" src="{{card.url}}"/>
+        <h4>{{card.rarity}}</h4>
+        <form action="{{ url_for('selectShow', card = card, index = index) }}" method="POST">
+            <input id=card type="submit" value="Select"/>
+        </form>
+    </div>
+    {%endfor%}
+</section>
+{% endblock %}
