@@ -128,6 +128,14 @@ def card():
     for card in db.cards.find({"rarity":rarity_picked}):
         cards.append(card)
     card = random.choice(list(cards))
+    db.users.update_one(
+        {"_id": ObjectId(flask_login.current_user.id)},
+        {
+            "$push":{
+                "cards":card
+            }
+        }
+    )
     return render_template('card.html',card=card)
 
 @app.route('/showcase')
@@ -145,6 +153,7 @@ def exchange():
 @app.route('/gift/<email>')
 def gift(email):
     return render_template("gift.html",email = email)
+
 @app.route('/trade/<email>')
 def trade(email):
     return render_template("trade.html",email = email)
