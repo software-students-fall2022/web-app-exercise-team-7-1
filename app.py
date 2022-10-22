@@ -163,6 +163,18 @@ def library(index):
     cards = flask_login.current_user.data["cards"]
     return render_template('library.html', cards = cards, index = index)
 
+@app.route('/remove/<index>', methods=['GET', 'POST'])
+def remove(index):
+    db.users.update_one(
+        {"_id": ObjectId(flask_login.current_user.id)},
+        {
+            "$set":{
+                "showcase."+index:None
+            }
+        }
+    )
+    return redirect(url_for('showcase')) 
+
 @app.route('/exchange',methods = ["GET","POST"])
 def exchange():
     if request.method == "POST":
