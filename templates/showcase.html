@@ -9,7 +9,7 @@
             <a href="{{ url_for('library', index = loop.index0 )}}">Select</a>
         </div>
         {% else %}
-        <div class="show">
+        <div class="card">
             <h3>{{card.cardname}}</h3>
             <img class="gif" src="{{card.url}}"/>
             <h4>{{card.rarity}}</h4>
