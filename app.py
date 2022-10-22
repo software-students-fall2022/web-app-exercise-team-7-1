@@ -145,7 +145,8 @@ def showcase():
 
 @app.route('/selectShow', methods=['POST'])
 def selectShow():
-    card = request.args.get('card')
+
+    card = eval(request.args.get('card'))
     index = request.args.get('index')
     db.users.update_one(
         {"_id": ObjectId(flask_login.current_user.id)},
