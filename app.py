@@ -106,12 +106,12 @@ def home():
     """
     Route for the home page
     """
-    return render_template('login.html') # render the hone template
+    return render_template('login.html') 
 
 @app.route('/all_cards')
 def all_cards():
     cards = db.cards.find({})
-    return render_template('all_cards.html', cards = cards) # render the hone template
+    return render_template('all_cards.html', cards = cards) 
 
 @app.route('/open_pack')
 def open_pack():
@@ -140,15 +140,36 @@ def card():
 
 @app.route('/showcase')
 def showcase():
-    return render_template('showcase.html') # render the hone template
+    show = flask_login.current_user.data["showcase"]
+    return render_template('showcase.html', show = show) 
+
+@app.route('/selectShow', methods=['POST'])
+def selectShow():
+
+    card = eval(request.args.get('card'))
+    index = request.args.get('index')
+    db.users.update_one(
+        {"_id": ObjectId(flask_login.current_user.id)},
+        {
+            "$set":{
+                "showcase."+index:card
+            }
+        }
+    )
+    return redirect(url_for('showcase')) 
+
+@app.route('/library/<index>')
+def library(index):
+    cards = flask_login.current_user.data["cards"]
+    return render_template('library.html', cards = cards, index = index)
 
 @app.route('/exchange',methods = ["GET","POST"])
 def exchange():
     if request.method == "POST":
         email = request.form['email']
-        return render_template('exchange.html', email=email) # render the hone templat
+        return render_template('exchange.html', email=email) 
     else:
-        return render_template('exchange.html') # render the hone template
+        return render_template('exchange.html') 
 
 @app.route('/gift/<email>')
 def gift(email):
