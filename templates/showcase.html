@@ -13,6 +13,9 @@
             <h3>{{card.cardname}}</h3>
             <img class="gif" src="{{card.url}}"/>
             <h4>{{card.rarity}}</h4>
+            <div class ="remove">
+                <a href="{{ url_for('remove', index = loop.index0)}}">Remove</a>
+            </div>
         </div>
         {% endif %}
         {%endfor%}
