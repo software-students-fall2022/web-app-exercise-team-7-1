@@ -1,3 +1,15 @@
 {% extends 'base.html' %} {% block container %}
-<h3>Trading with {{email}}</h3>
+<h3>Select the card you want to trade?</h3>
+    {% for card in cards %}
+    <form method="POST" id= "form2" action="{{ url_for('trade_select', cardid=card._id, email=email) }}">
+        <a href="javascript:$('#form2').submit();">
+            <div class="card" id="{{card.rarity}}">
+                <h3>{{card.cardname}}</h3>
+                <img class="gif" src="{{card.url}}"/>
+            </div>
+        </a>
+    </form>
+
+    {%endfor%}
+
 {% endblock %}

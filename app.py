@@ -230,10 +230,23 @@ def gift_post(cardid,email):
     )
     return render_template("gift_confirmation.html", cardid = cardid, email=email)
 
-
 @app.route('/trade/<email>')
 def trade(email):
-    return render_template("trade.html",email = email)
+    cards = flask_login.current_user.data["cards"]
+    return render_template("trade.html",cards = cards, email = email)
+
+@app.route('/trade_select/<cardid>/<email>', methods = ["POST"])
+def trade_select(cardid,email):
+    mycard = db.cards.find_one({"_id" : ObjectId(cardid)})
+    other_user = locate_user(email=email)
+    cards = other_user.data["cards"] 
+    return render_template("trade_select.html", email = email, cards = cards,mycard = mycard)
+
+
+@app.route('/trade_finsh/<cardid>/<email>/<mycardid>', methods = ["POST"])
+def trade_finish(cardid,email,mycardid):
+    return render_template("trade_select.html")
+    
 
 @app.route('/my_requests')
 def my_requests():
