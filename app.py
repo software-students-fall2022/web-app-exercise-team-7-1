@@ -8,6 +8,7 @@ import random
 import pymongo
 import datetime
 from bson.objectid import ObjectId
+import certifi
 
 # modules useful for user authentication
 import flask_login
@@ -32,7 +33,7 @@ if config['FLASK_ENV'] == 'development':
     app.debug = True # debug mnode
 
 # connect to the database
-cxn = pymongo.MongoClient(config['MONGO_URI'], serverSelectionTimeoutMS=5000)
+cxn = pymongo.MongoClient(config['MONGO_URI'], tlsCAFile=certifi.where())
 try:
     # verify the connection works by pinging the database
     cxn.admin.command('ping') # The ping command is cheap and does not require auth.

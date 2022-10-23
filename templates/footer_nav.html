@@ -1,10 +1,10 @@
-<nav>
-    {% if user.is_authenticated %}
-    Welcome, {{user.data.email }}!<br />
-    <li><a href="{{ url_for('open_pack')}}">Open Pack</a></li>
-    <li><a href="{{ url_for('all_cards')}}">All Cards</a></li>
-    <li><a href="{{ url_for('exchange')}}">Trade/Gift</a></li>
-    <li><a href="{{ url_for('showcase')}}">Showcase</a></li>
-    {% else %}
-    {% endif %}
-</nav>
+<footer id="navBar">
+    <!--{% if user.is_authenticated %}
+    Welcome, {{user.data.email }}!<br />-->
+    <a href="{{ url_for('open_pack')}}" class = "button">Open Pack</a>
+    <a href="{{ url_for('all_cards')}}" class = "button">All Cards</a>
+    <a href="{{ url_for('exchange')}}" class = "button">Trade/Gift</a>
+    <a href="{{ url_for('showcase')}}" class = "button">Showcase</a>
+    <!--{% else %}
+    {% endif %}-->
+</footer>
