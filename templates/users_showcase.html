@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="collection">
+    {% for user in results %}
+    <h3>{{user.email}}</h3>
+    {%endfor%}
+</section>
+{% endblock %}
