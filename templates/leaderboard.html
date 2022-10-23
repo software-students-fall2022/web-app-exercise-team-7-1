@@ -3,9 +3,20 @@
 {% block container %}
     <h1>LeaderBoard</h1>
     <section id="collection">
-        {% for user in top5 %}
-        <h3>{{user.email}}</h3>
-        {%endfor%}
+        <table border="1">
+            <tr>
+                <td>
+                    Top Five Users
+                </td>
+            </tr>
+            {% for user in top5 %}
+            <tr>
+                <td>
+                        <h3>{{user.email}}</h3>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
     </section>
 
 {% endblock %}
