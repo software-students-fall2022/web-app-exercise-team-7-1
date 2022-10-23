@@ -2,13 +2,13 @@
 
 {% block container %}
 <h1>Select a Card</h1>
-<section id="library">
+<section class="extension" id="library">
     {% for card in cards %}
-    <div class="card">
+    <div class="card" id="{{card.rarity}}">
         <h3>{{card.cardname}}</h3>
         <img class="gif" src="{{card.url}}"/>
         <h4>{{card.rarity}}</h4>
-        <form action="{{ url_for('selectShow', card = card, index = index) }}" method="POST">
+        <form id = "select" action="{{ url_for('selectShow', card = card, index = index) }}" method="POST">
             <input id=card type="submit" value="Select"/>
         </form>
     </div>
