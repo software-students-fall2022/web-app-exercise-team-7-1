@@ -4,6 +4,11 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: customFont;
+  src: url(../fonts/rexlia.ttf);
+}
+
 .container {
   /*border: 2px solid;*/
   /*max-width: 1200px;*/
@@ -84,32 +89,47 @@ form textarea {
   margin: 10px 0px 10px 0px;
 }
 
+
 .card{
-  background-color: black;
+  /*background-color: black;*/
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /*align-items: center;*/
   float: left;
-  border: 2px solid rgb(0, 247, 255);
+  /*border: 2px solid rgb(0, 247, 255);
   box-shadow: 5px white;
-  border-radius: 20px;
+  border-radius: 20px;*/
   width: 200px;
-  height: 400px;
-  font-size:larger;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  text-align: center;
+  z-index: 100;
+  font-style: normal;
+  /*font-size:larger;*/
+  font-weight: 400;
   margin: 50px;
   /*font-size: 1vh;
   margin: 5vw;
   width: 20vw;
   height: 40vw;*/
 }
+.card h3{
+  text-align: left;
+  left: 45px;
+  position: relative;
+  font-size: smaller;
+  font-family: customFont;
+  top:15%; 
+}
+#legendary{
+  background-image:url('../images/legendary.png');
+  color: rgb(235,132,25);
+}
 
-.gif{
-  /*width:60px;
-  height:60px;*/
-  /*width: 7vh;
-  height: 7vh;*/
-  width: 100px;
-  height: 100px;
+#epic{
+  color: rgb(146, 73, 218);
+  background-image:url("../images/epic.png");
 }
 
 /*---------NEW STUFF----------*/
@@ -166,9 +186,22 @@ footer/*,header */{
   position: fixed;
   bottom: 0;
 }
+#basic{
+  color: rgb(248, 248, 248);
+  background-image:url("../images/basic.png");
+}
+
 
 .extension {
   margin-top: 50px;
 
   margin-bottom: 50px;
+}
+
+.gif{
+  position: relative;
+  top: 20px;
+  width:100px;
+  height:100px;
+  z-index: -1;
 }
