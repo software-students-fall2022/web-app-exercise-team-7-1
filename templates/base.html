@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gif Cards</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 id = "appname">Gif Cards</h1>
+        {% include '_main_nav.html' %}
+      </header>
+      {% include '_flash_messages.html' %}
+      <main>{% block container %} {% endblock %}</main>
+      <footer id="source">
+        <p class = "refs">
+          &copy; 2022. Shared under the GPL3 license. Source code available at
+          <a
+            href="https://github.com/nyu-software-engineering/flask-pymongo-web-app-example"
+            >available on Github</a
+          >.
+        </p>
+      </footer>
+    </div>
+    {% include 'footer_nav.html' %}
+  </body>
+</html>

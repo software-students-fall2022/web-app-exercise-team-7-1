@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+    <h2>{{ author.email }}'s posts</h2>
+    <p>Return to <a href="{{ url_for('home') }}">all posts</a>.</p>
+    <section class="posts">
+
+        {% for doc in docs %}
+        <article class="post">
+            {% with author_id = doc.user._id %}
+            {% if author_id == current_user.id %}
+            <nav class="controls">
+                <a href="{{ url_for('edit', post_id=doc._id)}}">Edit</a> | <a href="{{ url_for('delete', post_id=doc._id)}}">Delete</a>
+            </nav>
+            {% endif %}
+            {% endwith %}
+            <p class="author">
+                <a href="{{ url_for('user', user_id=doc.user._id)}}">{{doc.user.email}}</a>
+                 at 
+                 {{ doc.created_at.strftime("%H:%M on %d %B %Y") }}
+            </p>
+            <p class="message">
+                {{ doc.message }}
+            </p>
+        </article>
+        {%endfor%}
+
+    </section>
+
+{% endblock %}

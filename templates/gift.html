@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block container %}
+<h3>Gifting to {{email}}</h3>
+<section id="gift">
+    <h3>Which Card do you wanna gift?</h3>
+    {% for card in cards %}
+    <form method="POST" id= "my_form" action="{{ url_for('gift_post', cardid=card._id, email=email) }}">
+        <a href="javascript:$('#my_form').submit();">
+            <div class="card" id="{{card.rarity}}">
+                <h3>{{card.cardname}}</h3>
+                <img class="gif" src="{{card.url}}"/>
+            </div>
+        </a>
+    </form>
+    {%endfor%}
+</section>{% endblock %}

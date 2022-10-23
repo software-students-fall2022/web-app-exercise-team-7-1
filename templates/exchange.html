@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <a href="{{url_for('my_requests')}}">My Requests</a>
+    <h1>Trade/Gift</h1> 
+    <form method="POST", action="{{url_for('exchange')}}">
+        Enter User's Email: <input id="email" type="text" name="email"/><br>
+        <input type="submit" value="Search"/>
+    </form>
+    {% if error %}
+        {{error}}
+    {% endif %}
+    {% if email %}
+        User to gift or trade : {{email}}
+    <form action="{{url_for('gift',email=email)}}",method="GET">
+        <input type="submit" value="Gift"/>
+    </form>
+    <form action="{{url_for('trade',email=email)}}",method="GET">
+        <input type="submit" value="Trade"/>
+    </form>
+    {% endif %}
+    
+{% endblock %}

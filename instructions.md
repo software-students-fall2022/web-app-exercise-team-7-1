@@ -82,7 +82,7 @@ Teams must hold 3 or more "daily" standup meetings per week.
 Team members are required to work from a single GitHub shared repository.
 
 - each team member must be able to push and bull to and from the shared repository.
-- each member's code contributions will be tracked, so team members must use their own accounts when making code changes.
+- each member's code contributions will be tracked, so team members must use their own accounts when making code chuse web-app-example-dbanges.
 - code changes must be done in branches in the same repository, not in the `main` branch and not in forked repositories.
 - when a code change is complete, the branch should be pushed to GitHub and a pull request should be created using GitHub's interface. Another team member must approve the pull request and merge it into the `main` branch if it is good code.
 

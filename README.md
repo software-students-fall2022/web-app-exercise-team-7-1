@@ -5,12 +5,17 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+A mobile app designed to allow users to collect, trade and showcase gif cards with other users.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+https://github.com/software-students-fall2022/web-app-exercise-team-7-1/issues
 
 ## Task boards
 
 See instructions. Delete this line and place a link to the task boards here.
+
+Task Board 1
+https://github.com/orgs/software-students-fall2022/projects/2
+Task Board 2
+https://github.com/orgs/software-students-fall2022/projects/30
