@@ -163,6 +163,11 @@ def library(index):
     cards = flask_login.current_user.data["cards"]
     return render_template('library.html', cards = cards, index = index)
 
+@app.route('/my_cards')
+def my_cards():
+    cards = flask_login.current_user.data["cards"]
+    return render_template('my_cards.html', cards = cards)   
+
 @app.route('/remove/<index>', methods=['GET', 'POST'])
 def remove(index):
     db.users.update_one(
@@ -181,6 +186,9 @@ def exchange():
     if request.method == "POST":
         if request.form["email"] != current_user.data["email"]:
             email = request.form['email']
+            if locate_user(email=email) == None:
+                error = "User not found, enter valid email"
+                return render_template('exchange.html', error=error) 
             return render_template('exchange.html', email=email) 
         else:
             error = "Cant Choose Yourself Silly!"
@@ -190,11 +198,46 @@ def exchange():
 
 @app.route('/gift/<email>')
 def gift(email):
-    return render_template("gift.html",email = email)
+    cards = flask_login.current_user.data["cards"]
+    return render_template("gift.html",email = email, cards = cards)
+
+@app.route('/gift/<cardid>/<email>',methods=["POST"])
+def gift_post(cardid,email):
+    cards = flask_login.current_user.data["cards"]
+    found = False
+    for i in range(len(cards)):
+        card = cards[i]
+        if ObjectId(card["_id"]) == ObjectId(cardid):
+            cards[-1],cards[i] = cards[i],cards[-1]
+            cards.pop()
+            break
+    db.users.update_one(
+        {"_id" : ObjectId(flask_login.current_user.id)},
+        {
+            "$set" : {
+                "cards" : cards
+            }
+        }  
+    )
+    reciever = locate_user(email=email)
+    db.users.update_one(
+        {"_id": ObjectId(reciever.id)},
+        {
+            "$push": {
+                "cards":card
+            }
+        }
+    )
+    return render_template("gift_confirmation.html", cardid = cardid, email=email)
+
 
 @app.route('/trade/<email>')
 def trade(email):
     return render_template("trade.html",email = email)
+
+@app.route('/my_requests')
+def my_requests():
+    return render_template("my_requests.html")
 
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
