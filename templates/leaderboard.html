@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <h1>LeaderBoard</h1>
+    <section id="collection">
+        {% for user in top5 %}
+        <h3>{{user.email}}</h3>
+        {%endfor%}
+    </section>
+
+{% endblock %}
