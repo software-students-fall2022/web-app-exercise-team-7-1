@@ -3,7 +3,9 @@
 {% block container %}
 <section id="collection">
     {% for user in results %}
-    <h3>{{user.email}}</h3>
+    <div class ="select">
+        <a href="{{ url_for('showcase_email', email = user.email )}}">{{user.email}}</a>
+    </div>
     {%endfor%}
 </section>
 {% endblock %}

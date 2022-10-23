@@ -143,6 +143,17 @@ def showcase():
     show = flask_login.current_user.data["showcase"]
     return render_template('showcase.html', show = show) 
 
+@app.route('/user_showcase/<email>')
+def showcase_email(email):
+    show = db.users.find_one({
+        "email":email
+    },
+    {
+        "_id": 0,
+        "showcase": 1
+    })["showcase"]
+    return render_template('user_showcase.html', show = show) 
+
 @app.route('/selectShow', methods=['POST'])
 def selectShow():
 
