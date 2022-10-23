@@ -6,14 +6,17 @@
         Enter User's Email: <input id="email" type="text" name="email"/><br>
         <input type="submit" value="Search"/>
     </form>
-    {% if email %}
-        User to gift or trade :{{email}}
+    {% if error %}
+        {{error}}
     {% endif %}
+    {% if email %}
+        User to gift or trade : {{email}}
     <form action="{{url_for('gift',email=email)}}",method="GET">
         <input type="submit" value="Gift"/>
     </form>
     <form action="{{url_for('trade',email=email)}}",method="GET">
         <input type="submit" value="Trade"/>
     </form>
+    {% endif %}
     
 {% endblock %}

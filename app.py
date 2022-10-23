@@ -177,9 +177,14 @@ def remove(index):
 
 @app.route('/exchange',methods = ["GET","POST"])
 def exchange():
+    current_user = flask_login.current_user
     if request.method == "POST":
-        email = request.form['email']
-        return render_template('exchange.html', email=email) 
+        if request.form["email"] != current_user.data["email"]:
+            email = request.form['email']
+            return render_template('exchange.html', email=email) 
+        else:
+            error = "Cant Choose Yourself Silly!"
+            return render_template('exchange.html', error=error) 
     else:
         return render_template('exchange.html') 
 
