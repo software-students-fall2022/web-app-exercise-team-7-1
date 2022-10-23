@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block container %}
+    <a href="{{url_for('my_requests')}}">My Requests</a>
     <h1>Trade/Gift</h1> 
     <form method="POST", action="{{url_for('exchange')}}">
         Enter User's Email: <input id="email" type="text" name="email"/><br>
