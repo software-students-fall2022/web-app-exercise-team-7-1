@@ -13,16 +13,9 @@
       </header>
       {% include '_flash_messages.html' %}
       <main>{% block container %} {% endblock %}</main>
-      <footer id="source">
-        <p class = "refs">
-          &copy; 2022. Shared under the GPL3 license. Source code available at
-          <a
-            href="https://github.com/nyu-software-engineering/flask-pymongo-web-app-example"
-            >available on Github</a
-          >.
-        </p>
+      <footer>
+      {% include 'footer_nav.html' %}
       </footer>
     </div>
-    {% include 'footer_nav.html' %}
   </body>
 </html>
