@@ -163,13 +163,23 @@ def library(index):
     cards = flask_login.current_user.data["cards"]
     return render_template('library.html', cards = cards, index = index)
 
+@app.route('/users_showcase')
+def users_showcase():
+    name = request.args.get('fname')
+    results = db.users.find(
+        {
+            "email": {'$regex': f".*{name}.*", '$options': 'i'}
+        }
+    )
+    return render_template('users_showcase.html', results = results)
+
 @app.route('/leaderboard')
 def leaderboard():
     cards = [
         {"$addFields":{"totalcards":{"$size": "$cards"}}},
         {"$sort": {"totalcards": -1}},
         {"$limit": 5}
-]
+    ]
     top5 = db.users.aggregate(cards)
     return render_template('leaderboard.html', top5 = top5) 
 
