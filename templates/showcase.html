@@ -3,6 +3,12 @@
 {% block container %}
     <h1>Showcase</h1>
     <section id="collection">
+        <form method="GET" action="{{ url_for('users_showcase') }}">
+            <input type="text" id="fname" name="fname" value="Search Users" />
+            <input type="submit" name="post-btn" value="Search" />
+        </form>
+    </section>
+    <section id="collection">
         {% for card in show %}
         {% if card == None %}
         <div class ="select">

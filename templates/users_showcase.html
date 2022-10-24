@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="collection">
+    {% for user in results %}
+    <div class ="select">
+        <a href="{{ url_for('showcase_email', email = user.email )}}">{{user.email}}</a>
+    </div>
+    {%endfor%}
+</section>
+{% endblock %}

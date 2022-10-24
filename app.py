@@ -144,6 +144,17 @@ def showcase():
     show = flask_login.current_user.data["showcase"]
     return render_template('showcase.html', show = show) 
 
+@app.route('/user_showcase/<email>')
+def showcase_email(email):
+    show = db.users.find_one({
+        "email":email
+    },
+    {
+        "_id": 0,
+        "showcase": 1
+    })["showcase"]
+    return render_template('user_showcase.html', show = show) 
+
 @app.route('/selectShow', methods=['POST'])
 def selectShow():
 
@@ -164,13 +175,23 @@ def library(index):
     cards = flask_login.current_user.data["cards"]
     return render_template('library.html', cards = cards, index = index)
 
+@app.route('/users_showcase')
+def users_showcase():
+    name = request.args.get('fname')
+    results = db.users.find(
+        {
+            "email": {'$regex': f".*{name}.*", '$options': 'i'}
+        }
+    )
+    return render_template('users_showcase.html', results = results)
+
 @app.route('/leaderboard')
 def leaderboard():
     cards = [
         {"$addFields":{"totalcards":{"$size": "$cards"}}},
         {"$sort": {"totalcards": -1}},
         {"$limit": 5}
-]
+    ]
     top5 = db.users.aggregate(cards)
     return render_template('leaderboard.html', top5 = top5) 
 
@@ -241,14 +262,84 @@ def gift_post(cardid,email):
     )
     return render_template("gift_confirmation.html", cardid = cardid, email=email)
 
-
 @app.route('/trade/<email>')
 def trade(email):
-    return render_template("trade.html",email = email)
+    cards = flask_login.current_user.data["cards"]
+    return render_template("trade.html",cards = cards, email = email)
+
+@app.route('/trade_select/<mycardid>/<email>', methods = ["POST"])
+def trade_select(mycardid,email):
+    mycard = db.cards.find_one({"_id" : ObjectId(mycardid)})
+    other_user = locate_user(email=email)
+    cards = other_user.data["cards"] 
+    return render_template("trade_select.html", email = email, cards = cards, mycard=mycard)
+
+
+@app.route('/trade_finsh/<cardid>/<email>/<mycardid>', methods = ["POST"])
+def trade_finish(cardid,email,mycardid):
+    makerid =flask_login.current_user.id
+    other = locate_user(email=email)
+    otherid= other.id
+    maker_card = db.cards.find_one({"_id": ObjectId(mycardid)})
+    reciever_card = db.cards.find_one({"_id": ObjectId(cardid)})
+    db.requests.insert_one({"maker":ObjectId(makerid), "maker_card":maker_card,"reciever":ObjectId(otherid), "reciever_card":reciever_card})
+    return render_template("trade_finish.html",cardid=cardid,email=email,mycardid=mycardid)
+    
 
 @app.route('/my_requests')
 def my_requests():
-    return render_template("my_requests.html")
+    requests = db.requests.find({"reciever": ObjectId(flask_login.current_user.id)})
+    return render_template("my_requests.html",requests=requests)
+
+@app.route('/deny_request/<requestid>', methods =["POST"])
+def deny_request(requestid):
+    requests = db.requests.delete_one({"_id": ObjectId(requestid)})
+    return redirect(url_for("my_requests"))
+
+@app.route('/accept_request/<requestid>',methods =["POST"])
+def accept_request(requestid):
+    request = db.requests.find_one({"_id":ObjectId(requestid)})
+    makerid = request["maker"]
+    recieverid= request["reciever"]
+    maker_card = request["maker_card"]
+    reciever_card = request["reciever_card"]
+    maker = db.users.find_one({"_id": makerid})
+    reciever = db.users.find_one({"_id": recieverid})
+    maker_cards = maker["cards"]
+    reciever_cards = reciever["cards"]
+    for i in range(len(maker_cards)):
+        card = maker_cards[i]
+        if card == maker_card:
+            maker_cards[-1],maker_cards[i] = maker_cards[i],maker_cards[-1]
+            maker_cards.pop()
+            break
+    maker_cards.append(reciever_card)
+    db.users.update_one(
+        {"_id" : ObjectId(makerid)},
+        {
+            "$set" : {
+                "cards" : maker_cards
+            }
+        }  
+    )
+    for i in range(len(reciever_cards)):
+        card = reciever_cards[i]
+        if card == reciever_card:
+            reciever_cards[-1],reciever_cards[i] = reciever_cards[i],reciever_cards[-1]
+            reciever_cards.pop()
+            break
+    reciever_cards.append(maker_card)
+    db.users.update_one(
+        {"_id" : ObjectId(recieverid)},
+        {
+            "$set" : {
+                "cards" : reciever_cards
+            }
+        }  
+    )
+    requests = db.requests.delete_one({"_id": ObjectId(requestid)})
+    return redirect(url_for("my_requests"))
+
 
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
