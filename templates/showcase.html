@@ -2,27 +2,29 @@
 
 {% block container %}
     <h1>Showcase</h1>
-    <section id="collection">
-        <form method="GET" action="{{ url_for('users_showcase') }}">
-            <input type="text" id="fname" name="fname" value="Search Users" />
-            <input type="submit" name="post-btn" value="Search" />
-        </form>
-    </section>
-    <section class="extension" id="collection">
-        {% for card in show %}
-        {% if card == None %}
-        <div class ="placeholder">
-            <a id="selection" href="{{ url_for('library', index = loop.index0 )}}">Select</a>
-        </div>
-        {% else %}
-        <div class="card" id="{{card.rarity}}">
-            <h3>{{card.cardname}}</h3>
-            <img class="gif" src="{{card.url}}"/>
-            <div class ="remove">
-                <a href="{{ url_for('remove', index = loop.index0)}}">Remove</a>
+        <div class="showcase">
+        <section id="collection">
+            <form method="GET" action="{{ url_for('users_showcase') }}">
+                <input type="text" id="fname" name="fname" value="Search Users" />
+                <input type="submit" name="post-btn" value="Search" />
+            </form>
+        </section>
+        <section class="extension" id="collection">
+            {% for card in show %}
+            {% if card == None %}
+            <div class ="placeholder">
+                <a id="selection" href="{{ url_for('library', index = loop.index0 )}}">Select</a>
             </div>
-        </div>
-        {% endif %}
-        {%endfor%}
-    </section>
+            {% else %}
+            <div class="card" id="{{card.rarity}}">
+                <h3>{{card.cardname}}</h3>
+                <img class="gif" src="{{card.url}}"/>
+                <div class ="remove">
+                    <a href="{{ url_for('remove', index = loop.index0)}}">Remove</a>
+                </div>
+            </div>
+            {% endif %}
+            {%endfor%}
+        </section>
+    </div>
 {% endblock %}
