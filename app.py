@@ -377,7 +377,7 @@ def signup_submit():
         })
         flask_login.login_user(user) # log in the user using flask-login
         flash('Thanks for joining, {}!'.format(user.data['email'])) # flash can be used to pass a special message to the template we are about to render
-        return redirect(url_for('home'))
+        return redirect(url_for('open_pack'))
     # else
     return 'Signup failed'
 
