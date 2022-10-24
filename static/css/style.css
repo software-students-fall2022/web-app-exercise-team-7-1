@@ -1,5 +1,6 @@
 * {
-  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  font-family: customFont;
   font-weight: normal;
 }
 
@@ -13,8 +14,36 @@ html {
   src: url(../fonts/rexlia.ttf);
 }
 
+.container {
+  /*border: 2px solid;*/
+  /*max-width: 1200px;*/
+  margin: 0 auto;
+}
+#login h2, #login p, #login p a{
+  font-family: customFont;
+}
+#login{
+  margin-top: 100px;
+  margin-left: -50px;
+  text-align: center;
+  font-size: 35pt;
+  font-family: customFont;
+}
+#login form{
+  font-family: customFont;
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 100px;
+}
+#login form input{
+  padding: 20px;
+  font-family: customFont;
+  text-align: center;
+  font-size: 40pt;
+  margin-bottom: 60px;
+}
+
 header {
-  color: white;
   background-color: black;
   display: flex;
   flex-direction: row;
@@ -22,10 +51,17 @@ header {
   justify-content: space-between; /* align along the flex direction */
   align-items: center; /* align across the flex direction */
 }
+h1{
+  font-size: 40pt;
+  font-family: customFont;
+}
 
 header,
 main {
   padding: 2rem;
+}
+refs {
+  margin-left: 5px;
 }
 
 header { /*removed main*/
@@ -35,22 +71,18 @@ header { /*removed main*/
 }
 
 main {
-  color: white;
   margin-top: 50px;
   margin-left: 60px;
 
 }
 
+/* NEW STUFF (OTHER PEOPLE)*/
 #appname {
   font-weight: bolder;
   font-size: 50px;
   padding: 10px 10px;
   text-shadow: 1px 1px 10px rgb(0, 247, 255) ;
-}
-
-a {
-  text-decoration: none;
-  color: white;
+  /*box-shadow:0px 0px 10px rgb(0, 247, 255);*/
 }
 
 #welcome {
@@ -79,7 +111,6 @@ form textarea {
   border: 1px solid gray;
   margin: 10px 0;
 }
-
 #pack{
   text-align: center;
   margin: 0px auto;
@@ -110,11 +141,15 @@ form textarea {
   width: 25vh;
   height: 50vh; 
 }
-
-#packed_card {
-  margin: auto;
+#packed_card .card img{
+  width: 80%;
+  height: 50%;
+  right: -5px;
 }
-
+#packed_card .card h3{
+  font-size: 30pt;
+  top:  5%;
+}
 .card{
   float: left;
   width: 400px;
@@ -128,7 +163,6 @@ form textarea {
   margin-top: 70px;
   margin-right: -50px;
 }
-
 .card h3{
   text-align: left;
   left: 45px;
@@ -137,7 +171,6 @@ form textarea {
   font-family: customFont;
   top:10%; 
 }
-
 #legendary{
   background-image:url('../images/legendary.png');
   color: rgb(235,132,25);
@@ -152,7 +185,6 @@ body {
   margin:0px 0px 55px 0px;
   overflow:auto;
 }
-
 .button {
   width:100%;
   padding: 1%;
@@ -166,32 +198,35 @@ body {
   /*----------------------*/
   font-family: "Anonymous Pro", monospace;
   color: white;
+  text-decoration: none;
   text-shadow: 5px 1px 20px rgb(0, 247, 255) ;
   font-size: 3.5vw;
 }
-
 footer {
   width: 100%;
   height:8vh;
   display:flex;
 }
-
+#source {
+  height:10vh;
+  position: fixed;
+  margin-left: 5px;
+  bottom: 0;
+}
 #navBar {
   width:100%;
   background-color:rgb(34, 34, 34);
   position: fixed;
   bottom: 0;
 }
-
 #basic{
   color: rgb(248, 248, 248);
   background-image:url("../images/basic.png");
 }
-
 .extension {
   margin-top: 50px;
   margin-left: 75px;
-  margin-bottom: 1000px;
+  margin-bottom: 500px;
 }
 .gif{
   position: relative;
@@ -204,10 +239,6 @@ footer {
 
 input {
   color: black;
-}
-
-.select {
-  align-items: right;
 }
 
 #select {
