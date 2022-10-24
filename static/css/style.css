@@ -151,7 +151,7 @@ form textarea {
 }
 #packed_card .card h3{
   font-size: 30pt;
-  top:  5%;
+  top:  3%;
 }
 .card{
   float: left;
@@ -168,11 +168,11 @@ form textarea {
 }
 .card h3{
   text-align: left;
-  left: 45px;
+  left: 6%;
   position: relative;
-  font-size: smaller;
+  font-size: 20pt;
   font-family: customFont;
-  top:10%; 
+  top:3%; 
 }
 #legendary{
   background-image:url('../images/legendary.png');
@@ -244,7 +244,27 @@ input {
   color: black;
 }
 
-#select {
+.placeholder{
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 20px;
+  float: left;
+  width: 270px;
+  height: 395px;
+  text-align: center;
+  z-index: 100;
+  font-style: normal;
+  font-weight: 400;
   margin-top: 70px;
-  margin-left: 85px;
+  margin-right: 70px;
+}
+
+#selection {
+  margin-left: 25%;
+  margin-top: 50%;
+  font-size: 30pt;
+  font-family: customFont;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }

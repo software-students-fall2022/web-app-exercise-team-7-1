@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block container %}
 <h3>Select the card you want to trade?</h3>
+<div class="extension">
     {% for card in cards %}
     <form method="POST" id= "{{card._id}}" action="{{ url_for('trade_select', mycardid=card._id, email=email) }}">
         <a href="javascript:$('#{{card._id}}').submit();">
@@ -10,5 +11,6 @@
         </a>
     </form>
     {%endfor%}
+</div>
 
 {% endblock %}
