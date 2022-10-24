@@ -279,3 +279,10 @@ input {
   margin-right: 25%;
   margin-bottom: -3%;
 }
+
+table.center {
+  text-align : center;
+  border : 1px black;
+  margin-left:auto; 
+  margin-right:auto;
+}
