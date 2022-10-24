@@ -261,14 +261,84 @@ def gift_post(cardid,email):
     )
     return render_template("gift_confirmation.html", cardid = cardid, email=email)
 
-
 @app.route('/trade/<email>')
 def trade(email):
-    return render_template("trade.html",email = email)
+    cards = flask_login.current_user.data["cards"]
+    return render_template("trade.html",cards = cards, email = email)
+
+@app.route('/trade_select/<mycardid>/<email>', methods = ["POST"])
+def trade_select(mycardid,email):
+    mycard = db.cards.find_one({"_id" : ObjectId(mycardid)})
+    other_user = locate_user(email=email)
+    cards = other_user.data["cards"] 
+    return render_template("trade_select.html", email = email, cards = cards, mycard=mycard)
+
+
+@app.route('/trade_finsh/<cardid>/<email>/<mycardid>', methods = ["POST"])
+def trade_finish(cardid,email,mycardid):
+    makerid =flask_login.current_user.id
+    other = locate_user(email=email)
+    otherid= other.id
+    maker_card = db.cards.find_one({"_id": ObjectId(mycardid)})
+    reciever_card = db.cards.find_one({"_id": ObjectId(cardid)})
+    db.requests.insert_one({"maker":ObjectId(makerid), "maker_card":maker_card,"reciever":ObjectId(otherid), "reciever_card":reciever_card})
+    return render_template("trade_finish.html",cardid=cardid,email=email,mycardid=mycardid)
+    
 
 @app.route('/my_requests')
 def my_requests():
-    return render_template("my_requests.html")
+    requests = db.requests.find({"reciever": ObjectId(flask_login.current_user.id)})
+    return render_template("my_requests.html",requests=requests)
+
+@app.route('/deny_request/<requestid>', methods =["POST"])
+def deny_request(requestid):
+    requests = db.requests.delete_one({"_id": ObjectId(requestid)})
+    return redirect(url_for("my_requests"))
+
+@app.route('/accept_request/<requestid>',methods =["POST"])
+def accept_request(requestid):
+    request = db.requests.find_one({"_id":ObjectId(requestid)})
+    makerid = request["maker"]
+    recieverid= request["reciever"]
+    maker_card = request["maker_card"]
+    reciever_card = request["reciever_card"]
+    maker = db.users.find_one({"_id": makerid})
+    reciever = db.users.find_one({"_id": recieverid})
+    maker_cards = maker["cards"]
+    reciever_cards = reciever["cards"]
+    for i in range(len(maker_cards)):
+        card = maker_cards[i]
+        if card == maker_card:
+            maker_cards[-1],maker_cards[i] = maker_cards[i],maker_cards[-1]
+            maker_cards.pop()
+            break
+    maker_cards.append(reciever_card)
+    db.users.update_one(
+        {"_id" : ObjectId(makerid)},
+        {
+            "$set" : {
+                "cards" : maker_cards
+            }
+        }  
+    )
+    for i in range(len(reciever_cards)):
+        card = reciever_cards[i]
+        if card == reciever_card:
+            reciever_cards[-1],reciever_cards[i] = reciever_cards[i],reciever_cards[-1]
+            reciever_cards.pop()
+            break
+    reciever_cards.append(maker_card)
+    db.users.update_one(
+        {"_id" : ObjectId(recieverid)},
+        {
+            "$set" : {
+                "cards" : reciever_cards
+            }
+        }  
+    )
+    requests = db.requests.delete_one({"_id": ObjectId(requestid)})
+    return redirect(url_for("my_requests"))
+
 
 # route to accept form submission and create a new post
 @app.route('/create', methods=['POST'])
