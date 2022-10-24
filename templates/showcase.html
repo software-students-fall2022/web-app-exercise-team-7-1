@@ -8,11 +8,11 @@
             <input type="submit" name="post-btn" value="Search" />
         </form>
     </section>
-    <section id="collection">
+    <section class="extension" id="collection">
         {% for card in show %}
         {% if card == None %}
-        <div class ="select">
-            <a href="{{ url_for('library', index = loop.index0 )}}">Select</a>
+        <div class ="placeholder">
+            <a id="selection" href="{{ url_for('library', index = loop.index0 )}}">Select</a>
         </div>
         {% else %}
         <div class="card" id="{{card.rarity}}">
