@@ -1,6 +1,6 @@
 * {
   color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: customFont;
   font-weight: normal;
 }
 
@@ -19,6 +19,29 @@ html {
   /*max-width: 1200px;*/
   margin: 0 auto;
 }
+#login h2, #login p, #login p a{
+  font-family: customFont;
+}
+#login{
+  margin-top: 100px;
+  margin-left: -50px;
+  text-align: center;
+  font-size: 35pt;
+  font-family: customFont;
+}
+#login form{
+  font-family: customFont;
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 100px;
+}
+#login form input{
+  padding: 20px;
+  font-family: customFont;
+  text-align: center;
+  font-size: 40pt;
+  margin-bottom: 60px;
+}
 
 header {
   background-color: black;
@@ -28,7 +51,10 @@ header {
   justify-content: space-between; /* align along the flex direction */
   align-items: center; /* align across the flex direction */
 }
-
+h1{
+  font-size: 40pt;
+  font-family: customFont;
+}
 
 header,
 main {
@@ -60,8 +86,17 @@ main {
 }
 
 #welcome {
-  font-size: larger;
+  font-size: 20pt;
+  font-family: customFont;
   text-align: right;
+}
+#welcome a{
+  font-size: 20pt;
+  font-family: customFont;
+  border: 1px solid rgb(249, 245, 245);
+  border-radius: 5px;
+  text-align: right;
+  padding: 10px;
 }
 
 .flashes p {
@@ -79,15 +114,41 @@ form textarea {
 #pack{
   text-align: center;
   margin: 0px auto;
-  margin-top: 150px;
+  margin-top: 200px;
   border: 1px solid white;
   background-color: black;
   border-radius: 15px;
   width: 25vh;
-  height: 50vh;
+  height: 40vh;
 }
-#packed_card {
-  margin: auto;
+
+#pack h2{
+  margin-top: 250px;
+  font-size:34pt;
+}
+
+#open{
+  width: 200px;
+  height: 100px;
+  font-size: 30pt;
+  border-radius: 5px;
+}
+
+#packed_card .card{
+  margin-left: 15%;
+  margin-top: 200px;
+  border-radius: 15px;
+  width: 25vh;
+  height: 50vh; 
+}
+#packed_card .card img{
+  width: 80%;
+  height: 50%;
+  right: -5px;
+}
+#packed_card .card h3{
+  font-size: 30pt;
+  top:  5%;
 }
 .card{
   float: left;
