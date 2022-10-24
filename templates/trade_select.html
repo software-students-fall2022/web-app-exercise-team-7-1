@@ -1,16 +1,17 @@
 {% extends 'base.html' %} 
 {% block container %}
+<div class="extension">
     <h3>Trading Card: </h3>
-    <div class="card" id="{{mycard.rarity}}">
-        <h3>{{mycard.cardname}}</h3>
-        <img class="gif" src="{{mycard.url}}"/>
+    <div class="trading">
+        <div class="card" id="{{mycard.rarity}}">
+            <h3>{{mycard.cardname}}</h3>
+            <img class="gif" src="{{mycard.url}}"/>
+        </div>
     </div>
 
-    <hr>
-
-    <h3>Select a card to request form {{email}} </h3>
+    <h3 id="selectcard">Select a card to request form {{email}} </h3>
     {% for card in cards %}
-    <div class="extension">
+    <div class="trade">
         <form method="POST" id= "{{card._id}}" action="{{ url_for('trade_finish', cardid=card._id, email=email, mycardid=mycard._id) }}">
         <a href="javascript:$('#{{card._id}}').submit();">
             <div class="card" id="{{card.rarity}}">
@@ -22,4 +23,5 @@
     </div>
 
     {%endfor%}
+</div>
 {% endblock %} 
