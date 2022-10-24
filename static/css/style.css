@@ -286,9 +286,10 @@ input {
 }
 #success{
   position: relative;
-  font-size: 50pt;
+  font-size: 35pt;
   text-align: center;
   padding-right: 20px;
+  top: 150px;
   right:30px
 
 }
@@ -296,6 +297,7 @@ input {
   margin-top: 250px;
   font-size: 40pt;
   text-align: center;
+  margin-right: 50px;
   padding: 10px;
 }
 #exchange input{
