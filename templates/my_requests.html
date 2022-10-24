@@ -4,21 +4,25 @@
     <h1>My Requests!</h1>
     <section id="my_requests">
         {% for request in requests %}
-        <div class="card" id="{{request.reciever_card.rarity}}">
-            <h3>{{request.reciever_card.cardname}}</h3>
-            <img class="gif" src="{{request.reciever_card.url}}"/>
+        <div id="request">
+            <div class="card" id="{{request.reciever_card.rarity}}">
+                <h3>{{request.reciever_card.cardname}}</h3>
+                <img class="gif" src="{{request.reciever_card.url}}"/>
+            </div>
+            <div>
+                <h1>for</h1>
+            </div> 
+            <div class="card" id="{{request.maker_card.rarity}}">
+                <h3>{{request.maker_card.cardname}}</h3>
+                <img class="gif" src="{{request.maker_card.url}}"/>
+            </div>
+            <form method="POST" action="{{url_for('accept_request', requestid = request._id)}}">
+                <input  type="submit" value="Yes" name="Yes"/>
+            </form>
+            <form method="POST" action="{{url_for('deny_request', requestid = request._id)}}">
+                <input type="submit" value="No" name="No"/>
+            </form>
         </div>
-        <h4>FOR</h4>
-        <div class="card" id="{{request.maker_card.rarity}}">
-            <h3>{{request.maker_card.cardname}}</h3>
-            <img class="gif" src="{{request.maker_card.url}}"/>
-        </div>
-        <form method="POST" action="{{url_for('accept_request', requestid = request._id)}}">
-            <input  type="submit" value="Yes" name="Yes"/>
-        </form>
-        <form method="POST" action="{{url_for('deny_request', requestid = request._id)}}">
-            <input type="submit" value="No" name="No"/>
-        </form>
         {%endfor%}
     </section>
     <h1>{{var}}</h1>

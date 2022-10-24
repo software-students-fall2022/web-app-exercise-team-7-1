@@ -161,6 +161,7 @@ form textarea {
   margin-top: 70px;
   margin-right: -50px;
 }
+
 .card h3{
   text-align: left;
   left: 6%;
@@ -228,7 +229,7 @@ footer {
 }
 .gif{
   position: relative;
-  top: 25px;
+  top: 10px;
   right: 15%;
   width:250px;
   height:250px;
@@ -278,4 +279,59 @@ input {
   padding-bottom: 25px;
   margin-right: 25%;
   margin-bottom: -3%;
+}
+
+#select{
+  position: relative;
+  top: -10px;
+}
+#success{
+  position: relative;
+  font-size: 35pt;
+  text-align: center;
+  padding-right: 20px;
+  top: 150px;
+  right:30px
+
+}
+#exchange{
+  margin-top: 250px;
+  font-size: 40pt;
+  text-align: center;
+  margin-right: 50px;
+  padding: 10px;
+}
+#exchange input{
+  font-size: 40pt;
+}
+#exchange form{
+  padding: 20px;
+  margin-top: 50px;
+
+}
+#request{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#request div h1{
+  position: relative;
+  margin-right: 30px;
+  right: -15px
+
+}
+#request .card img{
+  position: relative;
+  right: 27px;
+  top: -2px;
+  width: 225px;
+  height: 225px;
+}
+#request form input{
+  position: relative;
+  right: -20px;
+  font-size: 20pt;
+  margin-right: 10px;
+
 }
