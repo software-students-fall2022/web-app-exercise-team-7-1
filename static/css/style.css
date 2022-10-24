@@ -15,8 +15,6 @@ html {
 }
 
 .container {
-  /*border: 2px solid;*/
-  /*max-width: 1200px;*/
   margin: 0 auto;
 }
 #login h2, #login p, #login p a{
@@ -264,4 +262,20 @@ input {
   align-items: center;
   display: flex;
   flex-direction: row;
+}
+
+.trading {
+  border-bottom: 1px solid white;
+  clear: both;
+  margin-right: 25%;
+  padding-bottom: 25px;
+  margin-bottom: 500px;
+}
+
+#selectcard {
+  border-bottom: 1px solid white;
+  margin-top: -3%;
+  padding-bottom: 25px;
+  margin-right: 25%;
+  margin-bottom: -3%;
 }

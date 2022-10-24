@@ -10,7 +10,6 @@
         <form id = "select" action="{{ url_for('selectShow', card = card, index = index) }}" method="POST">
             <input id=card type="submit" value="Select"/>
         </form>
-        <h4>{{card.rarity}}</h4>
 
     </div>
     {%endfor%}
