@@ -13,8 +13,6 @@ https://github.com/software-students-fall2022/web-app-exercise-team-7-1/issues
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
-
 Task Board 1
 https://github.com/orgs/software-students-fall2022/projects/2
 Task Board 2
