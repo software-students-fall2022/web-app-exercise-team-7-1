@@ -335,3 +335,11 @@ input {
   margin-right: 10px;
 
 }
+
+table.center {
+  text-align : center;
+  border : 1px black;
+  margin-left:auto; 
+  margin-right:auto;
+  margin-top:100px;
+}
