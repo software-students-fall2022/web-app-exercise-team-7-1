@@ -1,11 +1,21 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8874500&assignment_repo_type=AssignmentRepo)
-# Database Information
+# Setup Information
 
-Import cards.json into a mongodb database using your preferred method (e.g mongoimport) into a collection called cards.
+Run the database locally and run the app using the instructions from the professor's example here: https://github.com/nyu-software-engineering/flask-pymongo-web-app-example#build-and-launch-the-database
 
-# Web Application Exercise
+Import cards.json into the mongodb database using your preferred method (e.g mongoimport) into a collection called cards.
 
-A little exercise to build a web application following an agile development process. See the [instructions](instructions.md) for more detail.
+(E.g mongoimport --db your_database_name --collection cards --host database_host --username your_username --password your_password --type json --file cards.json) 
+
+Replace your_database_name, database_host, your_username, and your_password with the correct credentials. Alternatively you can use Mongodb Compass for a GUI for importing the file. 
+
+
+## Team Members
+Team 7:
+- Andoh Rachel
+- Chen Alex
+- Al Kobaisi Elyazya
+- Olazabal Alejandro
 
 ## Product vision statement
 
